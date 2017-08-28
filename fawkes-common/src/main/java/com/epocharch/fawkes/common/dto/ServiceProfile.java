@@ -63,7 +63,7 @@ public class ServiceProfile extends BaseProfile implements Serializable {
 	/**
 	 * 转发用规则
 	 */
-	private String urlPattern = Constants.HEDWIG_URL_PATTERN;
+	private String urlPattern = Constants.URL_PATTERN;
 	/**
 	 * 机器IP
 	 */

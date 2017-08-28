@@ -27,7 +27,7 @@ import java.io.Serializable;
 public class FawkesGlobalIdVo implements Serializable {
 	private static final long serialVersionUID = -3449736799079134897L;
 	/**
-	 * hedwig全局ID
+	 * 全局ID
 	 */
 	private String globalId;
 	/**

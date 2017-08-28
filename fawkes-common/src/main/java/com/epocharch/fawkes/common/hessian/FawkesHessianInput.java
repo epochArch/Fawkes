@@ -970,7 +970,7 @@ public class FawkesHessianInput extends AbstractHessianInput {
 								clientIp = FawkesContextUtil.getString(PropKey.HOST_IP, "");
 								Class.forName(type, false, loader);
 							} catch (Exception e) {
-								logger.debug("Hedwig/Hessian/Burlap: 'readType=" + type + "' is an unknown class in " + loader
+								logger.debug("Fawkes/Hessian/Burlap: 'readType=" + type + "' is an unknown class in " + loader
 										+ ":\nMethod =" + getMethod() + ",needType=" + cl + ",readType=" + type + ",clientPoolId=" + clientAppId + ",clientIp=" + clientIp + "###");
 							}
 						}

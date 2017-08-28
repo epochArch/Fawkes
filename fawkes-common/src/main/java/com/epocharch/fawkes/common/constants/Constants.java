@@ -25,7 +25,7 @@ public class Constants {
 
 	public static final String PROTOCOL_PROFIX_HTTP = "http";
 	public static final String PROTOCOL_PROFIX_AKKATCP = "akka.tcp";
-	public static final String HEDWIG_URL_PATTERN = "fawkesServices";
+	public static final String URL_PATTERN = "fawkesServices";
 	public static final int DEFAULT_RELIVE_THRESHOLD = 50;
 	public static final String LOG_PROFIX = "Fawkes said: ";
 	public static final String UNKONW_DOMAIN = "UnknowDomain";

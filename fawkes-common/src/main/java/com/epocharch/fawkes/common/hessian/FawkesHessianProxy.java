@@ -53,8 +53,8 @@ public class FawkesHessianProxy implements InvocationHandler {
 	private WeakHashMap<Method, String> _mangleMap = new WeakHashMap<Method, String>();
 	private URL _url;
 
-	FawkesHessianProxy(FawkesHessianProxyFactory hedwigHessianProxyFactory, URL url) {
-		_factory = hedwigHessianProxyFactory;
+	FawkesHessianProxy(FawkesHessianProxyFactory HessianProxyFactory, URL url) {
+		_factory = HessianProxyFactory;
 		_url = url;
 	}
 

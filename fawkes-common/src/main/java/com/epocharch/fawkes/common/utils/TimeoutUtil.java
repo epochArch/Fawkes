@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
  */
 public class TimeoutUtil {
     private static Logger logger = LoggerFactory.getLogger(TimeoutUtil.class);
-    private static final String HEDWIG_INVOKE_TIMEOUT = "HEDWIG_INVOKE_TIMEOUT";
-    private static final String HEDWIG_INVOKE_READ_TIMEOUT = "HEDWIG_INVOKE_READ_TIMEOUT";
+    private static final String INVOKE_TIMEOUT = "INVOKE_TIMEOUT";
+    private static final String INVOKE_READ_TIMEOUT = "INVOKE_READ_TIMEOUT";
     private static final int MIN_TIME_OUT = 50; //最小50ms
     private static final int MAX_TIME_OUT = 30000;//最大30s
 
@@ -42,25 +42,25 @@ public class TimeoutUtil {
      */
     public static void setRequestTimeout(Long timeout, Long readTimeout) {
         if (timeout == null || timeout < MIN_TIME_OUT || timeout > MAX_TIME_OUT) {
-            throw new IllegalArgumentException("### Hedwig Timeout Config ERROR!!  " +
+            throw new IllegalArgumentException("### Timeout Config ERROR!!  " +
                     "MIN=" + MIN_TIME_OUT + ",MAX=" + MAX_TIME_OUT + " timeout=" + timeout);
         }
         if (readTimeout == null || readTimeout < MIN_TIME_OUT || readTimeout > MAX_TIME_OUT) {
-            throw new IllegalArgumentException("### Hedwig ReadTimeout Config ERROR!!  " +
+            throw new IllegalArgumentException("### ReadTimeout Config ERROR!!  " +
                     "MIN=" + MIN_TIME_OUT + ",MAX=" + MAX_TIME_OUT + " readTimeout=" + readTimeout);
         }
         if (timeout < readTimeout) {
-            throw new IllegalArgumentException("### Hedwig Timeout Config ERROR!! timeout can't less than readTimeout!!" +
+            throw new IllegalArgumentException("### Timeout Config ERROR!! timeout can't less than readTimeout!!" +
                     " timeout=" + timeout + ",readTimeout=" + readTimeout);
         }
-        FawkesContextUtil.setAttribute(HEDWIG_INVOKE_TIMEOUT, timeout);
-        FawkesContextUtil.setAttribute(HEDWIG_INVOKE_READ_TIMEOUT, readTimeout);
+        FawkesContextUtil.setAttribute(INVOKE_TIMEOUT, timeout);
+        FawkesContextUtil.setAttribute(INVOKE_READ_TIMEOUT, readTimeout);
     }
 
 
     public static Long getRequestTimeout() {
         Long result = null;
-        Object obj = FawkesContextUtil.getAttribute(HEDWIG_INVOKE_TIMEOUT, null);
+        Object obj = FawkesContextUtil.getAttribute(INVOKE_TIMEOUT, null);
         if (obj != null) {
             result = (Long) obj;
         }
@@ -72,7 +72,7 @@ public class TimeoutUtil {
 
     public static Long getRequestReadTimeout() {
         Long result = null;
-        Object obj = FawkesContextUtil.getAttribute(HEDWIG_INVOKE_READ_TIMEOUT, null);
+        Object obj = FawkesContextUtil.getAttribute(INVOKE_READ_TIMEOUT, null);
         if (obj != null) {
             result = (Long) obj;
         }

@@ -33,7 +33,7 @@ import java.lang.reflect.Constructor;
  * @author Archer
  * 
  */
-public class HedwigHessianExporter extends RemoteExporter implements InitializingBean {
+public class FawkesHessianExporter extends RemoteExporter implements InitializingBean {
 
 	private SerializerFactory serializerFactory = new SerializerFactory();
 

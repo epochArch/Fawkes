@@ -19,6 +19,7 @@
 package com.epocharch.fawkes.common.context;
 
 import com.epocharch.fawkes.common.constants.Constants;
+import com.epocharch.fawkes.common.constants.PropKeys;
 import com.epocharch.fawkes.common.uuid.KeyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class FawkesContextUtil {
 		if (StringUtils.isBlank(id)) {
 			String appId = RootContainer.getInstance().getAppId();
 			if (StringUtils.isBlank(appId)) {
-				appId = System.getProperty(Constants.APP_ID, "unknownApp");
+				appId = System.getProperty(PropKeys.APP_ID, "unknownApp");
 			}
 			id = KeyUtil.getGlobalId(appId);
 			setAttribute(Constants.GLOBAL_ID, id);
@@ -166,18 +167,18 @@ public class FawkesContextUtil {
 		cleanGlobal();
 	}
 
-	// 清除hedwig内部异步调用线程变量
+	// 清除内部异步调用线程变量
 	@Deprecated
 	private static void cleanLocal() {
 		getInvocationContext().cleanLocalContext();
 	}
 
-	// 清除hedwig外部调用线程变量，比如Web Action
+	// 清除外部调用线程变量，比如Web Action
 	public static void cleanGlobal() {
 		getInvocationContext().cleanGlobalContext();
 	}
 
-	// 根据globalId生成情况来清除hedwig线程变量(谁生成谁清理原则）
+	// 根据globalId生成情况来清除线程变量(谁生成谁清理原则）
 	public static void cleanGlobal(FawkesGlobalIdVo globalIdVo) {
 		if (globalIdVo != null) {
 			if (globalIdVo.isNewCreated()) {
