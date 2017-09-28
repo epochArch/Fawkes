@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+<bean name="appMeta" class="com.epocharch.fawkes.common.meta.AppMeta">
+    <constructor-arg value="serverApp"/>
+    <property name="orgnization" value="EpochArch"></property>
+    <property name="ssl" value="false"></property>
+  </bean>
+
+  <bean name="rs" class="com.epocharch.fawkes.server.netty.ReadService"></bean>
+  <bean name="ws" class="com.epocharch.fawkes.server.netty.WriteService"></bean>
+
+  <bean name="rswraper" class="com.epocharch.fawkes.server.ServiceWraper">
+    <property name="name" value="readService"></property>
+    <property name="serviceInterface" value="com.epocharch.fawkes.common.spi.IReadService"></property>
+    <property name="service" ref="rs"></property>
+    <property name="version" value="0.1"></property>
+    <property name="lowbound" value="5"></property>
+    <property name="highbound" value="10"></property>
+  </bean>
+
+  <bean name="wswraper" class="com.epocharch.fawkes.server.ServiceWraper">
+    <property name="name" value="writeService"></property>
+    <property name="serviceInterface" value="com.epocharch.fawkes.common.spi.IWriteService"></property>
+    <property name="service" ref="ws"></property>
+    <property name="version" value="0.1"></property>
+    <property name="lowbound" value="5"></property>
+    <property name="highbound" value="10"></property>
+  </bean>
+
+  <bean name="tcpServerMeta" class="com.epocharch.fawkes.common.meta.ServerMeta">
+    <constructor-arg index="0" ref="appMeta"/>
+    <constructor-arg index="1" value="TCP"/>
+    <constructor-arg index="2" value="8808"/>
+  </bean>
+  <bean name="tcpServer" class="com.epocharch.fawkes.server.netty.FawkesServer">
+    <property name="serverMeta" ref="tcpServerMeta"></property>
+    <property name="serviceSet">
+      <set>
+        <ref bean="rswraper"/>
+        <ref bean="wswraper"/>
+      </set>
+    </property>
+  </bean>
+</beans>
