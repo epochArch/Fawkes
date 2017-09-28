@@ -24,6 +24,7 @@ package com.epocharch.fawkes.common.context;
 import com.epocharch.common.config.PropertiesContainer;
 import com.epocharch.common.util.SystemUtil;
 import com.epocharch.fawkes.common.constants.Constants;
+import com.epocharch.fawkes.common.constants.PropKeys;
 import com.epocharch.fawkes.common.dto.ClientProfile;
 import com.epocharch.fawkes.common.dto.ServiceProfile;
 import com.epocharch.fawkes.common.utils.FawkesStringUtils;
@@ -55,7 +56,7 @@ public class RootContainer {
 
 	public static RootContainer getInstance() {
 		PropertiesContainer.getInstance().loadProperties(Constants.CONFIG_FILE_NAME, Constants.NAMESPACE_FAWKES);
-		String tmp = FawkesUtil.getProperty(Constants.APP_ID);
+		String tmp = FawkesUtil.getProperty(PropKeys.APP_ID);
 		appId = FawkesStringUtils.limitString(tmp, Constants.APPID_MAX_LENGTH);
 		return container;
 	}

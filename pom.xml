@@ -11,13 +11,14 @@
     <modules>
         <module>fawkes-provider</module>
         <module>fawkes-common</module>
+        <module>fawkes-client</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.test.skip>true</maven.test.skip>
         <zkClient.version>1.0-SNAPSHOT</zkClient.version>
         <common.version>1.0-SNAPSHOT</common.version>
-        <netty.version>3.10.6.Final</netty.version>
+        <netty.version>4.1.10.Final</netty.version>
         <hessian.version>4.0.38</hessian.version>
         <gson.version>2.1</gson.version>
         <junit.version>4.10</junit.version>
@@ -28,6 +29,8 @@
         <jmxtools.version>1.2.1</jmxtools.version>
         <common-codec.version>1.9</common-codec.version>
         <fawkes-common.version>1.0-SNAPSHOT</fawkes-common.version>
+        <servlet-api.version>2.4</servlet-api.version>
+        <akka.version>2.5.4</akka.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -43,7 +46,7 @@
             </dependency>
             <dependency>
                 <groupId>io.netty</groupId>
-                <artifactId>netty</artifactId>
+                <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
             </dependency>
             <dependency>
@@ -82,6 +85,11 @@
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.sun.jdmk</groupId>
                 <artifactId>jmxtools</artifactId>
                 <version>${jmxtools.version}</version>
@@ -97,6 +105,12 @@
                 <artifactId>fawkes-common</artifactId>
                 <version>${fawkes-common.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

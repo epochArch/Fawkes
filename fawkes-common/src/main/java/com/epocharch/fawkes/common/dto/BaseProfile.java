@@ -23,7 +23,7 @@ package com.epocharch.fawkes.common.dto;
 
 import com.epocharch.fawkes.common.constants.Constants;
 import com.epocharch.fawkes.common.constants.ProtocolType;
-import com.epocharch.fawkes.common.constants.ZkPathConstants;
+import com.epocharch.fawkes.common.zk.ZkPathConstants;
 import com.epocharch.fawkes.common.exception.InvalidParamException;
 import com.epocharch.fawkes.common.utils.FawkesUtil;
 import com.epocharch.fawkes.common.uuid.MD5;

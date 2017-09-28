@@ -53,14 +53,17 @@ public class Constants {
 	public static final String BALANCER_NAME_WEIGHTED_ROUNDROBIN = "wrr";
 	public static final String BALANCER_NAME_WRR_GRAY = "wrr_gray";
 	public static final String BALANCER_NAME_CONSISTENTHASH = "ch";
-	public static final int  DEFAULT_READ_TIMEOUT = 2000;
+	public static final String  TIMEOUT = "to";
 	public static final int  DEFAULT_TIMEOUT = 5000;
+	public static final String  READ_TIMEOUT = "rto";
+	public static final int  DEFAULT_READ_TIMEOUT = 2000;
 	public static final String INVOKE_TIME = "invokeTime";
 	public static final String TOKEN_GRAY = "token.gray";
 	public static final String TOKEN_MAX = "token.max";
 	public static final String CLIENT_VERSION = "clt.vsn";
 	public static final String CAMPS_NAME = "clt.camp";
 	public static final String NON_GROUP = "NoGroup";
+	public static final String AKKA_PROPERTIES="akkaProperties";
 }
 
 

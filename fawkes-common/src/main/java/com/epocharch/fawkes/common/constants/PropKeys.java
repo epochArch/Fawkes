@@ -41,5 +41,9 @@ public class PropKeys {
 
 
 	public static final String CLIENT_THROTTLE = "client.throttle";
+	public static final String CLIENT_THROTTLE_CLASS = "client.throttle.class";
 
+	public static final String RELIVE_INTERVAL = "relive.interval";
+	public static final String RELIVE_INTERVAL_LIMIT = "relive.interval.limit.time";
+	public static final String RELIVE_COUNT_LIMIT = "relive.interval.limit.count";
 }

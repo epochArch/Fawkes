@@ -17,13 +17,14 @@
  */
 
 /**
- * 
+ *
  */
 package com.epocharch.fawkes.common.utils;
 
 import com.epocharch.common.config.PropertiesContainer;
 import com.epocharch.fawkes.common.constants.Constants;
-import com.epocharch.fawkes.common.constants.ZkPathConstants;
+import com.epocharch.fawkes.common.constants.PropKeys;
+import com.epocharch.fawkes.common.zk.ZkPathConstants;
 import com.epocharch.fawkes.common.dto.BaseProfile;
 import com.epocharch.fawkes.common.dto.ServiceProfile;
 import org.aopalliance.intercept.MethodInvocation;
@@ -34,10 +35,10 @@ import org.springframework.aop.support.AopUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Archer Jiang
- * 
  */
 public class FawkesUtil {
 
@@ -89,7 +90,6 @@ public class FawkesUtil {
 		sb.append("]");
 		return sb.toString();
 	}
-
 
 	public static boolean isEmptyList(List list) {
 		return list == null || list.size() == 0;
@@ -222,12 +222,12 @@ public class FawkesUtil {
 		return sb.toString();
 	}
 
-	public static String getProperty(String key){
+	public static String getProperty(String key) {
 		return PropertiesContainer.getInstance().getPropertyByNameSpace(Constants.NAMESPACE_FAWKES, key);
 	}
 
-	public static String getProperty(String key,String defaultVale){
-		return PropertiesContainer.getInstance().getPropertyByNameSpace(Constants.NAMESPACE_FAWKES,key,defaultVale);
+	public static String getProperty(String key, String defaultVale) {
+		return PropertiesContainer.getInstance().getPropertyByNameSpace(Constants.NAMESPACE_FAWKES, key, defaultVale);
 	}
 
 	public static long getLongProperty(String key, long defValue) {
@@ -241,4 +241,25 @@ public class FawkesUtil {
 		}
 		return v;
 	}
+
+	public static int getIntProperty(String key,int defValue){
+		int v = defValue;
+		String value = getProperty(key);
+		if (value != null) {
+			try {
+				v = Integer.valueOf(value.trim());
+			} catch (Exception e) {
+			}
+		}
+		return v;
+	}
+
+	public static void setAppId(String appId) {
+		PropertiesContainer.getInstance().setProperty(Constants.NAMESPACE_FAWKES, PropKeys.APP_ID, appId);
+	}
+
+	public static String getAppId() {
+		return getProperty(PropKeys.APP_ID, "defaultApp");
+	}
+
 }
