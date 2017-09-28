@@ -33,7 +33,7 @@ public class TcpOutHandler extends ChannelOutboundHandlerAdapter {
 
 	private ISerializerHandler<TransShell> shellSerializer;
 
-	public TcpOutHandler(ISerializerHandler<TransShell> shellSerializer) {
+	public TcpOutHandler() {
 		shellSerializer = SerializeFactory.getInstance().getSerialize(SerializeFactory.INTERNAL_SER_SHELL);
 	}
 

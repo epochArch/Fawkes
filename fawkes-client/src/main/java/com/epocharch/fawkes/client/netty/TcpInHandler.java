@@ -38,8 +38,8 @@ public class TcpInHandler extends ChannelInboundHandlerAdapter {
 	private Logger logger = LoggerFactory.getLogger(TcpInHandler.class);
 	private ISerializerHandler<TransShell> shellSerializer;
 
-	public TcpInHandler(ISerializerHandler<TransShell> shellSerializer) {
-		shellSerializer = SerializeFactory.getInstance().getSerialize(SerializeFactory.INTERNAL_SER_SHELL);
+	public TcpInHandler() {
+		this.shellSerializer = SerializeFactory.getInstance().getSerialize(SerializeFactory.INTERNAL_SER_SHELL);
 	}
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {

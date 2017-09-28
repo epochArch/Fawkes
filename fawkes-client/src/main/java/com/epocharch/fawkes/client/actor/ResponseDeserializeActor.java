@@ -38,9 +38,11 @@ import org.slf4j.LoggerFactory;
 public class ResponseDeserializeActor extends UntypedAbstractActor{
 
 	private Logger logger = LoggerFactory.getLogger(ResponseDeserializeActor.class);
-	ISerializerHandler<TransShell> shellSerializer;
-	public ResponseDeserializeActor() {
+	private ISerializerHandler<TransShell> shellSerializer;
+	private String _methodId;
+	public ResponseDeserializeActor(String methodId) {
 		shellSerializer = SerializeFactory.getInstance().getSerialize(SerializeFactory.INTERNAL_SER_SHELL);
+		this._methodId = methodId;
 	}
 
 	@Override public void onReceive(Object message) throws Throwable {

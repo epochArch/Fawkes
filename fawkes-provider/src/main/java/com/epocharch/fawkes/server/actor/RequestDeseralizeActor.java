@@ -18,14 +18,14 @@
 
 package com.epocharch.fawkes.server.actor;
 
+import akka.actor.ActorRef;
 import akka.actor.UntypedAbstractActor;
 import com.epocharch.fawkes.common.dto.Message;
 import com.epocharch.fawkes.common.dto.Request;
 import com.epocharch.fawkes.common.dto.TransShell;
 import com.epocharch.fawkes.common.serializer.ISerializerHandler;
 import com.epocharch.fawkes.common.serializer.SerializeFactory;
-import com.epocharch.fawkes.server.Dispatcher;
-import io.netty.buffer.ByteBuf;
+import com.epocharch.fawkes.server.MethodWorkerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,25 +36,23 @@ public class RequestDeseralizeActor extends UntypedAbstractActor {
 
 	private Logger logger = LoggerFactory.getLogger(RequestDeseralizeActor.class);
 	private ISerializerHandler<TransShell>  shellSerializer;
-	private String methodId;
+	private String _methodId;
 
 	public RequestDeseralizeActor(String methodId) {
 		this.shellSerializer = SerializeFactory.getInstance().getSerialize(SerializeFactory.INTERNAL_SER_SHELL);
-		this.methodId = methodId;
+		this._methodId = methodId;
 	}
 
 	@Override public void onReceive(Object message) throws Throwable {
-		if(message instanceof ByteBuf){
-			ByteBuf byteBuf = (ByteBuf) message;
-			byte[] shellBytes = new byte[byteBuf.readableBytes()];
-			byteBuf.readBytes(shellBytes);
-			TransShell shell = shellSerializer.toObject(shellBytes);
+		if(message instanceof TransShell){
+			TransShell shell = (TransShell) message;
 			String type = shell.getType();
 			byte[] bytes = shell.getBody();
 			ISerializerHandler<Message> ser = SerializeFactory.getInstance().getSerialize(type);
 			if(ser!=null){
 				Request request = (Request) ser.toObject(bytes);
-				Dispatcher.getInstance().dispatch(request,getSender());
+				ActorRef ref = MethodWorkerRepository.getInstance().getMethod(shell.getMethodId());
+				ref.tell(request, getSender());
 			}else{
 				logger.error("Can't find deserializer type:{}"+type);
 			}

@@ -144,7 +144,6 @@ public class ServiceClientFactory implements FactoryBean,InitializingBean,Dispos
 	public void afterPropertiesSet() throws Exception {
 		AppMeta serverApp = new AppMeta(serviceAppName);
 		ClientMeta clientMeta = new ClientMeta(appMeta);
-
 		serviceMeta = new ServiceMeta(serverApp,clientMeta);
 		serviceMeta.setServiceName(serviceName);
 		serviceMeta.setServiceVersion(serviceVersion);
@@ -153,5 +152,45 @@ public class ServiceClientFactory implements FactoryBean,InitializingBean,Dispos
 		MethodActorRepository.getInstance().deploy(serviceInterface,serviceMeta);
 		InvocationHandler handler = new RequestHandler(serviceMeta);
 		serviceProxy = Proxy.newProxyInstance(getClass().getClassLoader(), new Class[] { serviceInterface }, handler);
+	}
+
+	public void setServiceAppName(String serviceAppName) {
+		this.serviceAppName = serviceAppName;
+	}
+
+	public void setAppMeta(AppMeta appMeta) {
+		this.appMeta = appMeta;
+	}
+
+	public void setOrgnization(String orgnization) {
+		this.orgnization = orgnization;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public void setServiceVersion(String serviceVersion) {
+		this.serviceVersion = serviceVersion;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public void setTimeout(long timeout) {
+		this.timeout = timeout;
+	}
+
+	public void setAutoRedo(boolean autoRedo) {
+		this.autoRedo = autoRedo;
+	}
+
+	public void setServiceInterface(Class serviceInterface) {
+		this.serviceInterface = serviceInterface;
+	}
+
+	public void setBalanceAlgo(String balanceAlgo) {
+		this.balanceAlgo = balanceAlgo;
 	}
 }

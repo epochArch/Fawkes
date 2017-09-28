@@ -37,10 +37,10 @@ public class RequestSerializeActor extends UntypedAbstractActor {
 	private Logger logger = LoggerFactory.getLogger(RequestSerializeActor.class);
 
 	private ISerializerHandler<TransShell> shellSerializer;
-	private String methodId;
+	private String _methodId;
 	public RequestSerializeActor(String methodId) {
 		shellSerializer = SerializeFactory.getInstance().getSerialize(SerializeFactory.INTERNAL_SER_SHELL);
-		this.methodId = methodId;
+		this._methodId = methodId;
 	}
 
 	@Override public void onReceive(Object message) throws Throwable {
@@ -50,13 +50,13 @@ public class RequestSerializeActor extends UntypedAbstractActor {
 			ISerializerHandler<Request> serializerHandler = SerializeFactory.getInstance().getSerialize(type);
 			if(serializerHandler!=null){
 				byte[] reqBytes =  serializerHandler.toBinary(request);
-				TransShell shell = new TransShell(methodId,type,reqBytes);
+				TransShell shell = new TransShell(_methodId,type,reqBytes);
 				byte[] shellBytes = shellSerializer.toBinary(shell);
-				IRouter router = ClientMethodRepository.getInstance().getRouter(methodId);
+				IRouter router = ClientMethodRepository.getInstance().getRouter(_methodId);
 				if(router!=null){
 					router.route(request.getMsgId(),shell,getSender());
 				}else {
-					String msg = "Can't find router for method:"+methodId;
+					String msg = "Can't find router for method:"+ _methodId;
 					logger.error(msg);
 					ResponseUtil.returnError(msg,getSender());
 				}

@@ -16,29 +16,17 @@
  *
  */
 
-package com.epocharch.fawkes.server;
+package com.epocharch.fawkes.client;
 
-import akka.actor.ActorRef;
-import com.epocharch.fawkes.common.dto.Request;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Created by archer on 12/09/2017.
+ * Created by archer on 28/09/2017.
  */
-public class Dispatcher {
+public class TestClient {
 
-	private static Dispatcher dispatcher = new Dispatcher();
-
-	private Dispatcher(){
-
-	}
-
-	public static Dispatcher getInstance(){
-		return dispatcher;
-	}
-
-	public void dispatch(Request request,ActorRef sender){
-		String methodId = request.getMethodId();
-		ActorRef ref = MethodWorkerRepository.getInstance().getMethod(methodId);
-		ref.tell(request,sender);
+	public static void main(String[] args){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("conf/clientAppContext.xml");
 	}
 }
